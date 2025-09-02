@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Enabled Software Development Training</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .presentation-container {
+            width: 100%;
+            max-width: 1200px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .slide {
+            display: none;
+            padding: 60px;
+            min-height: 700px;
+            animation: slideIn 0.5s ease-in-out;
+        }
+        
+        .slide.active {
+            display: block;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .slide-header {
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+        }
+        
+        h1 {
+            color: #2d3748;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 30px;
+        }
+        
+        h3 {
+            color: #4a5568;
+            font-size: 1.5em;
+            margin: 30px 0 20px;
+            padding-left: 20px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .subtitle {
+            color: #718096;
+            font-size: 1.2em;
+        }
+        
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        .card {
+            background: linear-gradient(135deg, #f6f8fb 0%, #e9ecef 100%);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .card h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+        
+        .workflow-container {
+            background: #f7fafc;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+        }
+        
+        .workflow-step {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        
+        .workflow-step:hover {
+            transform: translateX(10px);
+        }
+        
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.3em;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+        
+        .code-example {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+        
+        .code-comment {
+            color: #68d391;
+            font-style: italic;
+        }
+        
+        .highlight {
+            background: linear-gradient(135deg, #fbd38d, #f6ad55);
+            padding: 3px 8px;
+            border-radius: 5px;
+            color: #2d3748;
+            font-weight: bold;
+        }
+        
+        .metric-box {
+            background: linear-gradient(135deg, #48bb78, #38a169);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 10px;
+        }
+        
+        .metric-value {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .best-practice {
+            background: #edf2f7;
+            border-left: 4px solid #48bb78;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .warning {
+            background: #fed7d7;
+            border-left: 4px solid #fc8181;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 60px;
+            background: #f7fafc;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .nav-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .slide-counter {
+            color: #4a5568;
+            font-weight: bold;
+        }
+        
+        ul {
+            margin-left: 20px;
+            line-height: 1.8;
+        }
+        
+        li {
+            margin: 10px 0;
+            color: #4a5568;
+        }
+        
+        .implementation-timeline {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 40px 0;
+            position: relative;
+        }
+        
+        .implementation-timeline::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #cbd5e0;
+            z-index: 0;
+        }
+        
+        .timeline-item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1;
+            position: relative;
+            text-align: center;
+        }
+        
+        .timeline-item h5 {
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <!-- Slide 1: Title -->
+        <div class="slide active">
+            <div class="slide-header">
+                <h1>🚀 AI-Enabled Software Development</h1>
+                <p class="subtitle">Maximizing Developer Productivity in Android/Kernel/Modem Development</p>
+            </div>
+            <div class="content-grid">
+                <div class="metric-box">
+                    <div class="metric-value">75%</div>
+                    <div>Productivity Increase</div>
+                </div>
+                <div class="metric-box">
+                    <div class="metric-value">3-5x</div>
+                    <div>Parallel Issues</div>
+                </div>
+                <div class="metric-box">
+                    <div class="metric-value">60%</div>
+                    <div>Build Time Saved</div>
+                </div>
+            </div>
+            <div class="workflow-container">
+                <h3>Training Objectives</h3>
+                <ul>
+                    <li>Master AI coding agents (Claude Code, GeminiCLI, CodexCLI)</li>
+                    <li>Implement parallel development workflow</li>
+                    <li>Optimize build and testing cycles</li>
+                    <li>Establish best practices for AI-assisted development</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 2: Current Challenges -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Current Development Challenges</h2>
+            </div>
+            <div class="content-grid">
+                <div class="card">
+                    <h4>⏱️ Build Times</h4>
+                    <ul>
+                        <li>Incremental: 15-20 minutes</li>
+                        <li>Full build: 2 hours</li>
+                        <li>Multiple iterations = hours of waiting</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>🔄 Sequential Workflow</h4>
+                    <ul>
+                        <li>Fix → Build → Test → Repeat</li>
+                        <li>One issue at a time</li>
+                        <li>Idle time during builds</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>🎯 Low Productivity</h4>
+                    <ul>
+                        <li>2-3 issues per day maximum</li>
+                        <li>Context switching overhead</li>
+                        <li>Manual code review bottlenecks</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="warning">
+                <strong>⚠️ Impact:</strong> Developers spend 60-70% of their time waiting for builds and tests, limiting throughput to 2-3 issues per day.
+            </div>
+        </div>
+
+        <!-- Slide 3: AI-Enabled Solution -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>The AI-Enabled Solution</h2>
+            </div>
+            <div class="workflow-container">
+                <h3>Parallel Development Workflow</h3>
+                <div class="workflow-step">
+                    <div class="step-number">1</div>
+                    <div>
+                        <strong>Issue Analysis & Planning</strong>
+                        <p>Use AI to analyze logs, stack traces, and issue descriptions. Generate implementation plan.</p>
+                    </div>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-number">2</div>
+                    <div>
+                        <strong>Parallel Implementation</strong>
+                        <p>Work on 3-5 issues simultaneously using AI agents while others are building/testing.</p>
+                    </div>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-number">3</div>
+                    <div>
+                        <strong>Batch Building</strong>
+                        <p>Combine multiple fixes in a single build using feature flags or conditional compilation.</p>
+                    </div>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-number">4</div>
+                    <div>
+                        <strong>Automated Testing</strong>
+                        <p>AI-generated test scripts validate all fixes simultaneously.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Mastering AI Agents -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Step 1: Mastering AI Coding Agents</h2>
+            </div>
+            <h3>Effective Prompt Engineering</h3>
+            <div class="code-example">
+                <span class="code-comment"># Example: Android Framework Issue Analysis</span><br><br>
+                CONTEXT:<br>
+                - Android 14, Qualcomm SM8550 platform<br>
+                - Module: SystemUI/NotificationService<br>
+                - Build: eng-debug variant<br><br>
+                
+                ISSUE:<br>
+                - ANR in NotificationManagerService<br>
+                - Occurs when 50+ notifications pending<br>
+                - Main thread blocked for 5+ seconds<br><br>
+                
+                LOGS:<br>
+                [Attach full logcat with timestamps]<br>
+                [Include system_server traces]<br>
+                [Add dumpsys notification output]<br><br>
+                
+                TASK:<br>
+                1. Identify root cause from stack trace<br>
+                2. Propose fix with minimal side effects<br>
+                3. Consider performance implications<br>
+                4. Generate unit test for the fix
+            </div>
+            <div class="best-practice">
+                <strong>✅ Best Practice:</strong> Always provide complete context including platform, module, build variant, and full logs. The more specific your prompt, the better the AI output.
+            </div>
+        </div>
+
+        <!-- Slide 5: Parallel Workflow -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Step 2: Parallel Development Strategy</h2>
+            </div>
+            <h3>Branch Management for Parallel Work</h3>
+            <div class="code-example">
+                <span class="code-comment">#!/bin/bash</span><br>
+                <span class="code-comment"># Parallel Issue Management Script</span><br><br>
+                
+                <span class="code-comment"># Create feature branches for each issue</span><br>
+                git checkout -b fix/issue-1234-anr<br>
+                git checkout -b fix/issue-1235-memory-leak<br>
+                git checkout -b fix/issue-1236-boot-crash<br><br>
+                
+                <span class="code-comment"># Work on issues in parallel with AI</span><br>
+                claude-code --analyze "logs/issue_1234.txt" --fix<br>
+                gemini-cli --module "frameworks/base" --issue 1235<br><br>
+                
+                <span class="code-comment"># Create integration branch for batch testing</span><br>
+                git checkout -b integration/batch-$(date +%Y%m%d)<br>
+                git merge fix/issue-1234-anr<br>
+                git merge fix/issue-1235-memory-leak<br>
+                git merge fix/issue-1236-boot-crash
+            </div>
+            <div class="content-grid">
+                <div class="card">
+                    <h4>🎯 Issue Queue Management</h4>
+                    <ul>
+                        <li>Maintain 3-5 issues in pipeline</li>
+                        <li>Prioritize by module locality</li>
+                        <li>Group related fixes together</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>⚡ Context Switching</h4>
+                    <ul>
+                        <li>Use AI to maintain context</li>
+                        <li>Document decisions in PR</li>
+                        <li>Keep detailed notes per issue</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Batch Building -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Step 3: Optimized Build Strategy</h2>
+            </div>
+            <h3>Conditional Compilation for Multiple Fixes</h3>
+            <div class="code-example">
+                <span class="code-comment">// Android.bp - Feature flag configuration</span><br>
+                cc_defaults {<br>
+                &nbsp;&nbsp;name: "debug_features",<br>
+                &nbsp;&nbsp;cflags: [<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;"-DFIX_ANR_ISSUE_1234",<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;"-DFIX_MEMORY_LEAK_1235",<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;"-DFIX_BOOT_CRASH_1236",<br>
+                &nbsp;&nbsp;],<br>
+                }<br><br>
+                
+                <span class="code-comment">// SystemUI.cpp - Conditional fixes</span><br>
+                #ifdef FIX_ANR_ISSUE_1234<br>
+                &nbsp;&nbsp;// AI-generated fix for ANR<br>
+                &nbsp;&nbsp;mNotificationQueue.setMaxSize(100);<br>
+                &nbsp;&nbsp;enableAsyncProcessing();<br>
+                #endif<br><br>
+                
+                #ifdef FIX_MEMORY_LEAK_1235<br>
+                &nbsp;&nbsp;// AI-generated memory leak fix<br>
+                &nbsp;&nbsp;mBitmapCache.setRecyclePolicy(AGGRESSIVE);<br>
+                #endif
+            </div>
+            <div class="best-practice">
+                <strong>✅ Best Practice:</strong> Use feature flags to enable/disable fixes during testing. This allows testing multiple solutions without rebuilding.
+            </div>
+        </div>
+
+        <!-- Slide 7: AI-Assisted Testing -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Step 4: AI-Powered Testing</h2>
+            </div>
+            <h3>Automated Test Generation</h3>
+            <div class="code-example">
+                <span class="code-comment"># AI Prompt for Test Generation</span><br><br>
+                Generate comprehensive test suite for:<br>
+                - Module: NotificationManagerService<br>
+                - Fixes: ANR, Memory Leak, Boot Crash<br>
+                - Coverage: Unit + Integration + Stress<br><br>
+                
+                Requirements:<br>
+                1. Test each fix in isolation<br>
+                2. Test all fixes combined<br>
+                3. Include regression tests<br>
+                4. Add performance benchmarks<br>
+                5. Generate CTS test cases
+            </div>
+            <div class="workflow-container">
+                <h3>Testing Strategy</h3>
+                <div class="content-grid">
+                    <div class="card">
+                        <h4>🔍 Unit Tests</h4>
+                        <p>AI generates JUnit/GTest cases for each fix</p>
+                    </div>
+                    <div class="card">
+                        <h4>🔄 Integration Tests</h4>
+                        <p>Validate module interactions with AI-written scripts</p>
+                    </div>
+                    <div class="card">
+                        <h4>⚡ Stress Tests</h4>
+                        <p>AI creates scenarios to verify stability under load</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Code Review with AI -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Step 5: AI-Enhanced Code Review</h2>
+            </div>
+            <h3>Automated Review Checklist</h3>
+            <div class="content-grid">
+                <div class="card">
+                    <h4>🔒 Security Analysis</h4>
+                    <ul>
+                        <li>Permission checks</li>
+                        <li>Input validation</li>
+                        <li>Memory safety</li>
+                        <li>SELinux policy compliance</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>⚡ Performance Review</h4>
+                    <ul>
+                        <li>Algorithm complexity</li>
+                        <li>Memory allocation patterns</li>
+                        <li>Lock contention analysis</li>
+                        <li>Power consumption impact</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>🎯 Side Effects Check</h4>
+                    <ul>
+                        <li>API compatibility</li>
+                        <li>Module dependencies</li>
+                        <li>Config changes</li>
+                        <li>Backward compatibility</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="code-example">
+                <span class="code-comment"># AI Review Command</span><br>
+                claude-code review --security --performance --compatibility \<br>
+                &nbsp;&nbsp;--module frameworks/base \<br>
+                &nbsp;&nbsp;--compare-with main \<br>
+                &nbsp;&nbsp;--generate-report review_$(date +%Y%m%d).md
+            </div>
+        </div>
+
+        <!-- Slide 9: Real Example -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Real-World Example: ANR Fix</h2>
+            </div>
+            <h3>Complete Workflow Demo</h3>
+            <div class="workflow-container">
+                <div class="code-example">
+                    <span class="code-comment"># 1. Analyze the issue with AI</span><br>
+                    $ claude-code analyze --log "anr_trace.txt"<br><br>
+                    
+                    <span class="code-comment"># AI Output:</span><br>
+                    Root Cause: Synchronous database query on main thread<br>
+                    Location: NotificationManagerService.java:1234<br>
+                    Impact: Blocks UI thread for 5-8 seconds<br><br>
+                    
+                    <span class="code-comment"># 2. Generate fix</span><br>
+                    $ claude-code fix --issue ANR --module SystemUI<br><br>
+                    
+                    <span class="code-comment"># 3. Create test</span><br>
+                    $ gemini-cli test --type stress --notifications 1000<br><br>
+                    
+                    <span class="code-comment"># 4. Review changes</span><br>
+                    $ claude-code review --pr 1234 --checklist android
+                </div>
+                <div class="best-practice">
+                    <strong>Results:</strong> Issue fixed in 30 minutes vs 3 hours traditional approach. No regression found in 1000+ test iterations.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Best Practices -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Best Practices & Guidelines</h2>
+            </div>
+            <div class="content-grid">
+                <div class="card">
+                    <h4>📝 Prompt Engineering</h4>
+                    <ul>
+                        <li>Include full context and constraints</li>
+                        <li>Specify coding standards</li>
+                        <li>Request explanations with code</li>
+                        <li>Ask for multiple solutions</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>🔄 Workflow Management</h4>
+                    <ul>
+                        <li>Batch similar issues together</li>
+                        <li>Use feature branches effectively</li>
+                        <li>Maintain issue tracking dashboard</li>
+                        <li>Document AI interactions</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>✅ Quality Assurance</h4>
+                    <ul>
+                        <li>Always verify AI suggestions</li>
+                        <li>Run full test suite before merge</li>
+                        <li>Peer review critical changes</li>
+                        <li>Monitor performance metrics</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="warning">
+                <strong>⚠️ Important:</strong> AI is a powerful assistant but not a replacement for engineering judgment. Always validate AI-generated code against requirements and platform guidelines.
+            </div>
+        </div>
+
+        <!-- Slide 11: Implementation Plan -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Implementation Roadmap</h2>
+            </div>
+            <div class="implementation-timeline">
+                <div class="timeline-item">
+                    <h5>Week 1-2</h5>
+                    <p>Setup & Training</p>
+                </div>
+                <div class="timeline-item">
+                    <h5>Week 3-4</h5>
+                    <p>Pilot Program</p>
+                </div>
+                <div class="timeline-item">
+                    <h5>Week 5-6</h5>
+                    <p>Process Refinement</p>
+                </div>
+                <div class="timeline-item">
+                    <h5>Week 7-8</h5>
+                    <p>Full Rollout</p>
+                </div>
+            </div>
+            <div class="workflow-container">
+                <h3>Success Metrics</h3>
+                <div class="content-grid">
+                    <div class="metric-box">
+                        <div class="metric-value">5-8</div>
+                        <div>Issues/Day/Developer</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value">50%</div>
+                        <div>Build Time Reduction</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value">90%</div>
+                        <div>First-Time Fix Rate</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12: Q&A and Resources -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Resources & Next Steps</h2>
+            </div>
+            <div class="content-grid">
+                <div class="card">
+                    <h4>📚 Documentation</h4>
+                    <ul>
+                        <li>AI Agent Setup Guides</li>
+                        <li>Prompt Template Library</li>
+                        <li>Workflow Automation Scripts</li>
+                        <li>Best Practices Handbook</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>🛠️ Tools & Scripts</h4>
+                    <ul>
+                        <li>Batch build automation</li>
+                        <li>Test orchestration framework</li>
+                        <li>AI integration plugins</li>
+                        <li>Performance monitoring dashboard</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>🤝 Support</h4>
+                    <ul>
+                        <li>Weekly AI clinic sessions</li>
+                        <li>Slack channel: #ai-dev-support</li>
+                        <li>Pair programming sessions</li>
+                        <li>Monthly best practices review</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="best-practice">
+                <h3>🎯 Key Takeaways</h3>
+                <ul>
+                    <li>AI agents enable 3-5x productivity increase through parallel development</li>
+                    <li>Batch building and testing saves 60% of wait time</li>
+                    <li>Proper prompt engineering is crucial for quality outputs</li>
+                    <li>Always validate AI suggestions with human expertise</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="navigation">
+            <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">← Previous</button>
+            <span class="slide-counter">
+                <span id="currentSlide">1</span> / <span id="totalSlides">12</span>
+            </span>
+            <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Next →</button>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        
+        document.getElementById('totalSlides').textContent = totalSlides;
+        
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            
+            document.getElementById('currentSlide').textContent = currentSlide + 1;
+            
+            // Update navigation buttons
+            document.getElementById('prevBtn').disabled = currentSlide === 0;
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
+        }
+        
+        function changeSlide(direction) {
+            showSlide(currentSlide + direction);
+        }
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') changeSlide(-1);
+            if (e.key === 'ArrowRight') changeSlide(1);
+        });
+        
+        // Initialize
+        showSlide(0);
+    </script>
+</body>
+</html>
