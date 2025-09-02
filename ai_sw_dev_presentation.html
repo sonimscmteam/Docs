@@ -273,9 +273,120 @@
             color: #667eea;
             margin-bottom: 5px;
         }
+        
+        .toc-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .toc-content {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        .toc-title {
+            color: #2d3748;
+            font-size: 1.8em;
+            margin-bottom: 30px;
+            text-align: center;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 15px;
+        }
+        
+        .toc-item {
+            padding: 15px 20px;
+            margin: 5px 0;
+            background: #f7fafc;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-left: 4px solid transparent;
+        }
+        
+        .toc-item:hover {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            transform: translateX(10px);
+            border-left: 4px solid #667eea;
+        }
+        
+        .toc-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .toc-close:hover {
+            transform: scale(1.1);
+        }
+        
+        .toc-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            z-index: 100;
+        }
+        
+        .toc-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
     </style>
 </head>
 <body>
+    <!-- Table of Contents Button -->
+    <button class="toc-btn" onclick="showTOC()">📋 Contents</button>
+    
+    <!-- Table of Contents Overlay -->
+    <div class="toc-overlay" id="tocOverlay" onclick="hideTOC()">
+        <div class="toc-content" onclick="event.stopPropagation()">
+            <button class="toc-close" onclick="hideTOC()">×</button>
+            <div class="toc-title">📚 Table of Contents</div>
+            <div class="toc-item" onclick="goToSlide(0); hideTOC()">1. 🚀 AI-Enabled Software Development</div>
+            <div class="toc-item" onclick="goToSlide(1); hideTOC()">2. Current Development Challenges</div>
+            <div class="toc-item" onclick="goToSlide(2); hideTOC()">3. The AI-Enabled Solution</div>
+            <div class="toc-item" onclick="goToSlide(3); hideTOC()">4. Step 1: Mastering AI Coding Agents</div>
+            <div class="toc-item" onclick="goToSlide(4); hideTOC()">5. Step 2: Parallel Development Strategy</div>
+            <div class="toc-item" onclick="goToSlide(5); hideTOC()">6. Step 3: Optimized Build Strategy</div>
+            <div class="toc-item" onclick="goToSlide(6); hideTOC()">7. Step 4: AI-Powered Testing</div>
+            <div class="toc-item" onclick="goToSlide(7); hideTOC()">8. Step 5: AI-Enhanced Code Review</div>
+            <div class="toc-item" onclick="goToSlide(8); hideTOC()">9. Real-World Example: ANR Fix</div>
+            <div class="toc-item" onclick="goToSlide(9); hideTOC()">10. Best Practices & Guidelines</div>
+            <div class="toc-item" onclick="goToSlide(10); hideTOC()">11. Implementation Roadmap</div>
+            <div class="toc-item" onclick="goToSlide(11); hideTOC()">12. Resources & Next Steps</div>
+        </div>
+    </div>
+
     <div class="presentation-container">
         <!-- Slide 1: Title -->
         <div class="slide active">
@@ -391,7 +502,7 @@
             <div class="code-example">
                 <span class="code-comment"># Example: Android Framework Issue Analysis</span><br><br>
                 CONTEXT:<br>
-                - Android 14, Qualcomm SM8550 platform<br>
+                - Android 14, Qualcomm SM7550 platform<br>
                 - Module: SystemUI/NotificationService<br>
                 - Build: eng-debug variant<br><br>
                 
@@ -432,8 +543,13 @@
                 git checkout -b fix/issue-1236-boot-crash<br><br>
                 
                 <span class="code-comment"># Work on issues in parallel with AI</span><br>
-                claude-code --analyze "logs/issue_1234.txt" --fix<br>
-                gemini-cli --module "frameworks/base" --issue 1235<br><br>
+                # Open Claude conversation for issue 1234:<br>
+                # Human: Please analyze this ANR log and suggest a fix:<br>
+                # [paste contents of logs/issue_1234.txt]<br><br>
+                
+                # Open Gemini conversation for issue 1235:<br>
+                # Human: I have a memory leak in frameworks/base.<br>
+                # Here's the issue details: [paste issue 1235 description]<br><br>
                 
                 <span class="code-comment"># Create integration branch for batch testing</span><br>
                 git checkout -b integration/batch-$(date +%Y%m%d)<br>
@@ -590,7 +706,7 @@
                 <div class="code-example">
                     <span class="code-comment"># 1. Analyze the issue with AI</span><br>
                     Human: I have an ANR in SystemUI. Here's the trace:<br>
-                    [paste anr_trace.txt content]<br><br>
+                    @anr_trace.txt<br><br>
                     
                     <span class="code-comment"># Claude's Response:</span><br>
                     Root Cause: Synchronous database query on main thread<br>
@@ -771,10 +887,23 @@
             showSlide(currentSlide + direction);
         }
         
+        function goToSlide(slideNumber) {
+            showSlide(slideNumber);
+        }
+        
+        function showTOC() {
+            document.getElementById('tocOverlay').style.display = 'flex';
+        }
+        
+        function hideTOC() {
+            document.getElementById('tocOverlay').style.display = 'none';
+        }
+        
         // Keyboard navigation
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowLeft') changeSlide(-1);
             if (e.key === 'ArrowRight') changeSlide(1);
+            if (e.key === 'Escape') hideTOC();
         });
         
         // Initialize

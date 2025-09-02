@@ -1,18 +1,18 @@
 # 📚 AI-Enabled Software Development - Complete Presenter's Guide
 
 ## 🎯 Table of Contents
-1. [Slide 1: Introduction & Objectives](#slide-1-introduction--objectives)
-2. [Slide 2: Current Challenges](#slide-2-current-challenges)  
-3. [Slide 3: AI-Enabled Solution](#slide-3-ai-enabled-solution)
-4. [Slide 4: Mastering AI Agents](#slide-4-mastering-ai-agents)
-5. [Slide 5: Parallel Development Strategy](#slide-5-parallel-development-strategy)
-6. [Slide 6: Optimized Build Strategy](#slide-6-optimized-build-strategy)
-7. [Slide 7: AI-Powered Testing](#slide-7-ai-powered-testing)
-8. [Slide 8: AI-Enhanced Code Review](#slide-8-ai-enhanced-code-review)
-9. [Slide 9: Real-World Example](#slide-9-real-world-example)
-10. [Slide 10: Best Practices & Guidelines](#slide-10-best-practices--guidelines)
-11. [Slide 11: Implementation Roadmap](#slide-11-implementation-roadmap)
-12. [Slide 12: Resources & Q&A](#slide-12-resources--qa)
+1. [Slide 1: Introduction & Objectives](#-slide-1-introduction--objectives)
+2. [Slide 2: Current Challenges](#-slide-2-current-challenges)  
+3. [Slide 3: AI-Enabled Solution](#-slide-3-ai-enabled-solution)
+4. [Slide 4: Mastering AI Agents](#-slide-4-mastering-ai-agents)
+5. [Slide 5: Parallel Development Strategy](#-slide-5-parallel-development-strategy)
+6. [Slide 6: Optimized Build Strategy](#-slide-6-optimized-build-strategy)
+7. [Slide 7: AI-Powered Testing](#-slide-7-ai-powered-testing)
+8. [Slide 8: AI-Enhanced Code Review](#-slide-8-ai-enhanced-code-review)
+9. [Slide 9: Real-World Example](#-slide-9-real-world-example)
+10. [Slide 10: Best Practices & Guidelines](#-slide-10-best-practices--guidelines)
+11. [Slide 11: Implementation Roadmap](#-slide-11-implementation-roadmap)
+12. [Slide 12: Resources & Q&A](#-slide-12-resources--qa)
 
 **Complete Guide:** This presenter guide now provides comprehensive talking points, examples, and speaker notes for all 12 slides, covering the complete training presentation from introduction to implementation.
 
@@ -269,7 +269,7 @@ graph TB
 ```markdown
 CONTEXT:
 - Platform: Android 14 (API 34)
-- Device: Qualcomm SM8550 (Snapdragon 8 Gen 2)
+- Device: Qualcomm SM7550
 - Module: frameworks/base/services/core/java/com/android/server/notification/
 - Build variant: aosp_kalama-userdebug
 - Issue ID: BUG-2024-1234
@@ -356,7 +356,7 @@ Add NULL check for dp->link before access
 ```
 # Show multiple conversations for batch analysis
 # Conversation with Claude - Issue 1234
-Human: I have an ANR in SystemUI. Here's the log: [paste anr_systemui.txt]
+Human: I have an ANR in SystemUI. Here's the log: @anr_trace.txt
 Please analyze and provide a fix.
 
 Claude: ✓ Generated analysis and fix for Issue #1234 (ANR)
@@ -1962,14 +1962,14 @@ Development Time      | 8 hours   | 45 min    | 90% faster
 #### **Rule #1: Context is King (30% of Success)**
 ```
 ❌ Bad: "Fix this crash"
-✅ Good: "Android 14 boot crash on Snapdragon 8 Gen 2, occurs during 
+✅ Good: "Android 14 boot crash on Qualcomm SM7550, occurs during 
 SystemServer startup, affects 15% of devices, here's the stack trace 
 and logcat..."
 ```
 
 **Key Elements to Always Include:**
 - Platform/OS version (Android 14, Linux 5.15, etc.)
-- Hardware specifics (Snapdragon 8 Gen 2, MediaTek Dimensity)
+- Hardware specifics (Qualcomm SM7550, MediaTek Dimensity)
 - Module/component (SystemUI, kernel/drivers, bootloader)
 - Build variant (eng, userdebug, user)
 - Reproduction rate and conditions
@@ -2485,7 +2485,7 @@ Monitoring & Metrics:
 **A:** "Start with volunteers and early adopters. Once they see the results - fixing complex ANRs in 45 minutes instead of 8 hours - skepticism disappears quickly. Senior developers often become the biggest advocates because they can finally focus on architecture instead of debugging."
 
 #### **Q: "Can this work for our specific hardware/platform?"**
-**A:** "AI is platform-agnostic. Whether it's Snapdragon, MediaTek, Intel, or custom silicon, AI can analyze logs, understand datasheets, and suggest fixes. The principles are the same: provide context, get analysis, implement solutions, verify results."
+**A:** "AI is platform-agnostic. Whether it's Qualcomm SM7550, MediaTek, Intel, or custom silicon, AI can analyze logs, understand datasheets, and suggest fixes. The principles are the same: provide context, get analysis, implement solutions, verify results."
 
 #### **Q: "What's the biggest risk?"**
 **A:** "Over-reliance without verification. That's why we emphasize the human-in-the-loop approach. AI accelerates, humans validate. Also, context switching overhead if you try to juggle too many issues - that's why we limit to 5 parallel issues maximum."
