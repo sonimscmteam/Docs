@@ -571,10 +571,12 @@
             </div>
             <div class="code-example">
                 <span class="code-comment"># AI Review Command</span><br>
-                claude-code review --security --performance --compatibility \<br>
-                &nbsp;&nbsp;--module frameworks/base \<br>
-                &nbsp;&nbsp;--compare-with main \<br>
-                &nbsp;&nbsp;--generate-report review_$(date +%Y%m%d).md
+                # Ask Claude to review code changes<br>
+                Human: Please review these changes for:<br>
+                - Security vulnerabilities<br>
+                - Performance impact<br>
+                - Compatibility issues<br>
+                Module: frameworks/base, Compare with: main
             </div>
         </div>
 
@@ -587,21 +589,22 @@
             <div class="workflow-container">
                 <div class="code-example">
                     <span class="code-comment"># 1. Analyze the issue with AI</span><br>
-                    $ claude-code analyze --log "anr_trace.txt"<br><br>
+                    Human: I have an ANR in SystemUI. Here's the trace:<br>
+                    [paste anr_trace.txt content]<br><br>
                     
-                    <span class="code-comment"># AI Output:</span><br>
+                    <span class="code-comment"># Claude's Response:</span><br>
                     Root Cause: Synchronous database query on main thread<br>
                     Location: NotificationManagerService.java:1234<br>
                     Impact: Blocks UI thread for 5-8 seconds<br><br>
                     
                     <span class="code-comment"># 2. Generate fix</span><br>
-                    $ claude-code fix --issue ANR --module SystemUI<br><br>
+                    Human: Please provide a fix for this ANR issue in SystemUI<br><br>
                     
                     <span class="code-comment"># 3. Create test</span><br>
-                    $ gemini-cli test --type stress --notifications 1000<br><br>
+                    Human: Generate a stress test for 1000 notifications<br><br>
                     
                     <span class="code-comment"># 4. Review changes</span><br>
-                    $ claude-code review --pr 1234 --checklist android
+                    Human: Review this PR for Android best practices
                 </div>
                 <div class="best-practice">
                     <strong>Results:</strong> Issue fixed in 30 minutes vs 3 hours traditional approach. No regression found in 1000+ test iterations.

@@ -1,0 +1,18 @@
+Enabling AI in SW development process
+
+Development environment can be Android framework, kernel, bootloader, qulacomm modem. Any changes done by developer need incremetal of full build. 
+Incremental build takes 15-20 min and full build takes 2 hours. Plan is to increase developer productivity by working on multiple issue in parallely
+because coding agents can fix issues quicly and for testing it take 15 min to 2 hours so developers are wasting time in waiting. our job is to propose
+a development best practice to optimize the development time and productivity.
+
+Step1: Using coding agent like > claude code, GeminiCLI, CodexCLI >> done
+Step2: How to increase engineer productivity by guiding to get max out of coding agents
+- planning task/implementation, log analisis or issue description analisis of reported issues by giving full code, log and issue disciption and reproduction steps to agent
+- Writing good prompt, solve issues and implement new feature
+- Code review w.r.t security, performance and side effects
+- code commit with agent commit msg
+- testing implementation with help of agent
+
+Good ideas about how to work on multiple issues parallely and test all issue with single build.
+
+I have to give training on this to entire team with a ppt and some examples. Please help
