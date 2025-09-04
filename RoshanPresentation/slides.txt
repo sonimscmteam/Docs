@@ -1,0 +1,14 @@
+Want to give team presenataion on AI assisted fixes recently done, below are the two examples i want to present:                │
+1. First issue was, customer support team reported issues on Harbor/Omega Android devices, where the VoiceCommand app is falining to call a person by name.
+   1.1 The issue was the voiceservice was not able to detect the Contact names
+   1.2 Issue was coming from the Nuance library, which was closed source(.jar) file and no source was available
+   1.3 In order to fix the issue, decompiled the source code, but the problem was the source was fully obfuscated and not able to make sense
+   1.4 Used the AI to convert the obfuscated code and genrated the overidden methods in new class which helped to solve the issue
+   1.5 Gerrit fixes by AI: http://10.15.1.119:8080/c/X530/qssi/platform/vendor/unc/+/7792
+
+2. Second instance where AI helped was,
+   2.1 In Omega Android device we had several platform apps which have been originally developed for XP5 project, 
+and later ported to Harbor, Omega etc., over the period several SDK APIs are deprecated.
+   2.2 As an example used CLI AI agent to update the deprecated APIs for Talkback app,
+   2.3 AI identified several deprecated APIs and oudated practices as shown in image.png
+

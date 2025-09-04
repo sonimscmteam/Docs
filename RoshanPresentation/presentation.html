@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Assisted Development Fixes</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .slide {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: slideIn 0.6s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        h1 {
+            color: #4a5568;
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 15px;
+        }
+        
+        h2 {
+            color: #2d3748;
+            font-size: 1.8em;
+            margin-top: 0;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+        }
+        
+        h3 {
+            color: #4a5568;
+            font-size: 1.4em;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+        
+        .issue-number {
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+        
+        .sub-point {
+            background: #f7fafc;
+            border-left: 4px solid #667eea;
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .sub-point h4 {
+            margin: 0 0 10px 0;
+            color: #2d3748;
+            font-size: 1.1em;
+        }
+        
+        .sub-point p {
+            margin: 0;
+            color: #4a5568;
+        }
+        
+        .gerrit-link {
+            background: #48bb78;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 15px;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+        
+        .gerrit-link:hover {
+            background: #38a169;
+            text-decoration: none;
+            color: white;
+        }
+        
+        .highlight {
+            background: #fed7d7;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #e53e3e;
+            margin: 20px 0;
+        }
+        
+        .ai-badge {
+            background: #9f7aea;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+        
+        .device-tag {
+            background: #ed8936;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            margin-right: 8px;
+        }
+        
+        .intro-slide {
+            text-align: center;
+            padding: 60px 40px;
+        }
+        
+        .intro-slide h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        
+        .intro-slide p {
+            font-size: 1.3em;
+            color: #4a5568;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        li {
+            margin: 10px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        li::before {
+            content: "→";
+            color: #667eea;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        /* Modal styles for image zoom */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.9);
+            cursor: pointer;
+        }
+        
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 90%;
+            max-width: 1200px;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        
+        .close-modal:hover,
+        .close-modal:focus {
+            color: #bbb;
+            text-decoration: none;
+        }
+        
+        .zoomable-image {
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        
+        .zoomable-image:hover {
+            transform: scale(1.02);
+        }
+        
+        .zoom-hint {
+            font-size: 0.8em;
+            color: #007bff;
+            margin-top: 5px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Title Slide -->
+        <div class="slide intro-slide">
+            <h1>AI-Assisted Development</h1>
+            <p>Leveraging AI to Solve Development Challenges Case Study</p>
+        </div>
+
+        <!-- Overview Slide -->
+        <div class="slide">
+            <h2>Presentation Overview</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 30px;">
+                <div>
+                    <h3 style="color: #667eea; margin-bottom: 15px;">📋 Agenda</h3>
+                    <ul>
+                        <li><strong>Case Study 1:</strong> Voice-Command Fixes</li>
+                        <li><strong>Case Study 2:</strong> API Modernization</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="color: #667eea; margin-bottom: 15px;">🎯 Objectives</h3>
+                    <ul>
+                        <li>Demonstrate AI effectiveness in debugging</li>
+                        <li>Show practical problem-solving approaches</li>
+                        <li>Highlight development efficiency gains</li>
+                        <li>Share lessons learned and best practices</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Issue 1: Voice-Command App -->
+        <div class="slide">
+            <h2><span class="issue-number">1</span>Voice-Command Fixes <span class="ai-badge">AI-Assisted</span></h2>
+            
+            <div class="highlight">
+                <p><strong>Problem:</strong> Customer support team reported issues on <span class="device-tag">Harbor</span><span class="device-tag">Omega</span>devices where the Voice-Command app was failing to call a person by name.</p>
+            </div>
+
+            <div class="sub-point">
+                <h4>1.1 Root Cause Analysis</h4>
+                <p>The voice service was not able to detect Contact names properly</p>
+            </div>
+
+            <div class="sub-point">
+                <h4>1.2 Technical Challenge</h4>
+                <p>Issue originated from the Nuance proprietary library, which was a closed source (.jar) file with no available source code</p>
+            </div>
+
+            <div class="sub-point">
+                <h4>1.3 Initial Investigation</h4>
+                <p>Decompiled the source code, but encountered fully obfuscated code that was difficult to understand</p>
+                
+                <div style="margin: 20px 0; text-align: center; background: #f8f9fa; padding: 15px; border-radius: 8px; border: 2px solid #e9ecef;">
+                    <h4 style="color: #495057; margin-bottom: 15px;">Decompiled Obfuscated Code</h4>
+                    <img src="image1.png" alt="Decompiled obfuscated code from Nuance library" class="zoomable-image" onclick="openModal1()" style="width: 100%; min-width: 600px; height: auto; border: 1px solid #dee2e6; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                    <p style="font-size: 0.9em; color: #6c757d; margin-top: 10px; font-style: italic;">Complex obfuscated code structure making manual analysis extremely difficult</p>
+                    <p class="zoom-hint">📷 Click image to zoom</p>
+                </div>
+            </div>
+
+            <div class="sub-point">
+                <h4>1.4 AI Solution</h4>
+                <p>Used AI to convert the obfuscated code and generate overridden methods in a new class, successfully resolving the issue</p>
+            </div>
+
+            <div class="sub-point">
+                <h4>1.5 Implementation</h4>
+                <p>Solution implemented and merged to repository</p>
+                <a href="http://10.15.1.119:8080/c/X530/qssi/platform/vendor/unc/+/7792" class="gerrit-link" target="_blank">View Gerrit Fix →</a>
+            </div>
+        </div>
+
+        <!-- Issue 2: Deprecated APIs in Talkback App -->
+        <div class="slide">
+            <h2><span class="issue-number">2</span>Deprecated API Modernization <span class="ai-badge">AI-Assisted</span></h2>
+            
+            <div class="highlight">
+                <p><strong>Challenge:</strong> Platform apps originally developed for XP5 project were ported to <span class="device-tag">Harbor</span><span class="device-tag">Omega</span> and other devices, but contained several deprecated SDK APIs.</p>
+            </div>
+
+            <div class="sub-point">
+                <h4>2.1 Legacy Code Challenge</h4>
+                <p>Several platform apps had been originally developed for XP5 project and later ported to Harbor, Omega, etc. Over the period, several SDK APIs became deprecated</p>
+            </div>
+
+            <div class="sub-point">
+                <h4>2.2 AI-Powered Solution</h4>
+                <p>Used CLI AI agent to systematically update deprecated APIs for the Talkback app</p>
+            </div>
+
+            <div class="sub-point">
+                <h4>2.3 Results & Impact</h4>
+                <p>AI successfully identified several deprecated APIs and outdated practices, providing modernized alternatives</p>
+                
+                <div style="margin: 20px 0; text-align: center; background: #f8f9fa; padding: 15px; border-radius: 8px; border: 2px solid #e9ecef;">
+                    <h4 style="color: #495057; margin-bottom: 15px;">AI Analysis Results</h4>
+                    <img src="image.png" alt="AI-identified deprecated APIs and outdated practices" class="zoomable-image" onclick="openModal()" style="width: 100%; min-width: 600px; height: auto; border: 1px solid #dee2e6; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                    <p style="font-size: 0.9em; color: #6c757d; margin-top: 10px; font-style: italic;">AI identified 8 specific deprecated APIs and provided modern alternatives</p>
+                    <p class="zoom-hint">📷 Click image to zoom</p>
+                </div>
+                
+                <div style="margin-top: 20px;">
+                    <h4>Implementation Links:</h4>
+                    <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
+                        <a href="http://10.15.1.119:8080/c/X530/qssi/platform/vendor/unc/+/7364" class="gerrit-link" target="_blank">Fix #7364</a>
+                        <a href="http://10.15.1.119:8080/c/X530/qssi/platform/vendor/unc/+/7365" class="gerrit-link" target="_blank">Fix #7365</a>
+                        <a href="http://10.15.1.119:8080/c/X530/qssi/platform/vendor/unc/+/7366" class="gerrit-link" target="_blank">Fix #7366</a>
+                        <a href="http://10.15.1.119:8080/c/X530/qssi/platform/vendor/unc/+/7367" class="gerrit-link" target="_blank">Fix #7367</a>
+                        <a href="http://10.15.1.119:8080/c/X530/qssi/platform/vendor/unc/+/7368" class="gerrit-link" target="_blank">Fix #7368</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Summary Slide -->
+        <div class="slide">
+            <h2>Key Takeaways</h2>
+            
+            <ul>
+                <li><strong>AI as a Problem Solver:</strong> Capable of handling complex, obfuscated code challenges</li>
+                <li><strong>Legacy Code Modernization:</strong> Efficient identification and updating of deprecated APIs</li>
+                <li><strong>Time & Resource Savings:</strong> Accelerated development cycles through intelligent automation</li>
+                <li><strong>Code Quality Improvement:</strong> Enhanced maintainability and platform compatibility</li>
+                <li><strong>Scalable Solutions:</strong> Applicable across multiple device platforms and projects</li>
+            </ul>
+            
+            <div style="text-align: center; margin-top: 40px; padding: 20px; background: #f0f4f8; border-radius: 10px;">
+                <h3 style="color: #667eea; margin-bottom: 10px;">Future Opportunities</h3>
+                <p>Continue leveraging AI for code analysis, modernization, and problem-solving across our development lifecycle</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for image zoom -->
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <span class="close-modal">&times;</span>
+        <img class="modal-content" id="modalImage" src="image.png" alt="AI-identified deprecated APIs and outdated practices">
+    </div>
+
+    <!-- Modal for image1 zoom -->
+    <div id="imageModal1" class="modal" onclick="closeModal1()">
+        <span class="close-modal">&times;</span>
+        <img class="modal-content" id="modalImage1" src="image1.png" alt="Decompiled obfuscated code from Nuance library">
+    </div>
+
+    <script>
+        function openModal() {
+            document.getElementById('imageModal').style.display = 'block';
+            // Center the modal image
+            setTimeout(() => {
+                const modal = document.getElementById('imageModal');
+                const modalContent = document.getElementById('modalImage');
+                modalContent.style.marginTop = Math.max(0, (window.innerHeight - modalContent.offsetHeight) / 2) + 'px';
+            }, 10);
+        }
+
+        function closeModal() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+
+        function openModal1() {
+            document.getElementById('imageModal1').style.display = 'block';
+            // Center the modal image
+            setTimeout(() => {
+                const modal = document.getElementById('imageModal1');
+                const modalContent = document.getElementById('modalImage1');
+                modalContent.style.marginTop = Math.max(0, (window.innerHeight - modalContent.offsetHeight) / 2) + 'px';
+            }, 10);
+        }
+
+        function closeModal1() {
+            document.getElementById('imageModal1').style.display = 'none';
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+                closeModal1();
+            }
+        });
+
+        // Prevent closing when clicking on the image itself
+        document.getElementById('modalImage').addEventListener('click', function(event) {
+            event.stopPropagation();
+        });
+
+        document.getElementById('modalImage1').addEventListener('click', function(event) {
+            event.stopPropagation();
+        });
+    </script>
+</body>
+</html>
